@@ -86,9 +86,13 @@ src/main/java/com/compliance/riskmonitor/
 git clone https://github.com/YOUR_USERNAME/real-time-compliance-monitor.git
 cd real-time-compliance-monitor
 
+#Double-click start.bat
+#       OR
 # Start all services
 docker-compose up --build
 ```
+
+### After Starting (takes 3-5 mins first time)
 
 All 6 services start automatically:
 - Spring Boot App → `http://localhost:8080`
@@ -96,6 +100,18 @@ All 6 services start automatically:
 - Kibana → `http://localhost:5601`
 - PostgreSQL → `localhost:5433`
 - Kafka → `localhost:9092`
+
+| Service      | URL |
+|--------------|-----|
+| 🌐 REST API  | http://localhost:8080 |
+| ❤ Health     | http://localhost:8080/actuator/health |
+| 📊 Dashboard | http://localhost:8080/api/v1/dashboard/summary |
+| 🔍 Kibana    | http://localhost:5601 |
+
+### Stop Everything
+```bash
+stop.bat
+
 
 ### Run Locally (Without Docker App)
 ```bash
