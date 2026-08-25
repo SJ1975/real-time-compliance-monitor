@@ -154,6 +154,26 @@ curl -X POST http://localhost:8080/api/v1/transactions \
   }'
 ```
 
+## 🐍 Python ETL Pipeline
+
+Batch analytics pipeline built with Python + Pandas.
+
+### Run ETL
+```bash
+cd etl
+python -m venv .venv
+.venv\Scripts\activate
+pip install -r requirements.txt
+python etl_pipeline.py
+```
+
+### Reports Generated
+- Daily transaction volume trends
+- Hourly transaction patterns
+- Risk level breakdown
+- Location analytics (SAFE/MODERATE/DANGEROUS)
+- Top flagged users
+
 ### Advanced Search
 ```bash
 curl -X POST http://localhost:8080/api/v1/search/transactions \
