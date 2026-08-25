@@ -1,6 +1,9 @@
 package com.compliance.riskmonitor.service;
 
+import com.compliance.riskmonitor.dto.DailyTrendDTO;
 import com.compliance.riskmonitor.dto.DashboardSummary;
+import com.compliance.riskmonitor.dto.HourlyPatternDTO;
+import com.compliance.riskmonitor.dto.LocationAnalyticsDTO;
 import com.compliance.riskmonitor.entity.Transaction;
 import com.compliance.riskmonitor.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
@@ -101,5 +104,90 @@ public class DashboardService {
         );
 
         return breakdown;
+    }
+
+    @Transactional(readOnly = true)
+    public List<DailyTrendDTO> getDailyTrends() {
+        log.info("Building daily trends report");
+
+        List<Object[]> results = transactionRepository.getDailyTrends();
+
+        return results.stream().map(row -> {
+            BigDecimal totalAmount = row[2] != null
+                    ? new BigDecimal(row[2].toString())
+                    : BigDecimal.ZERO;
+            BigDecimal avgAmount = row[3] != null
+                    ? new BigDecimal(row[3].toString())
+                    .setScale(2, RoundingMode.HALF_UP)
+                    : BigDecimal.ZERO;
+
+            return DailyTrendDTO.builder()
+                    .date(row[0] != null ? row[0].toString() : "Unknown")
+                    .totalTransactions(((Number) row[1]).longValue())
+                    .totalAmount(totalAmount)
+                    .averageAmount(avgAmount)
+                    .flaggedCount(((Number) row[4]).longValue())
+                    .build();
+        }).collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<HourlyPatternDTO> getHourlyPatterns() {
+        log.info("Building hourly patterns report");
+
+        List<Object[]> results = transactionRepository.getHourlyPatterns();
+
+        return results.stream().map(row -> {
+            int hour = ((Number) row[0]).intValue();
+            BigDecimal avgAmount = row[2] != null
+                    ? new BigDecimal(row[2].toString())
+                    .setScale(2, RoundingMode.HALF_UP)
+                    : BigDecimal.ZERO;
+
+            return HourlyPatternDTO.builder()
+                    .hour(hour)
+                    .timeLabel(String.format("%02d:00 - %02d:00", hour, hour + 1))
+                    .transactionCount(((Number) row[1]).longValue())
+                    .avgAmount(avgAmount)
+                    .flaggedCount(((Number) row[3]).longValue())
+                    .build();
+        }).collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<LocationAnalyticsDTO> getLocationAnalytics() {
+        log.info("Building location analytics report");
+
+        List<Object[]> results = transactionRepository.getLocationAnalytics();
+
+        return results.stream().map(row -> {
+            long total   = ((Number) row[1]).longValue();
+            long flagged = ((Number) row[2]).longValue();
+
+            BigDecimal avgRiskScore = row[3] != null
+                    ? new BigDecimal(row[3].toString())
+                    .setScale(2, RoundingMode.HALF_UP)
+                    : BigDecimal.ZERO;
+
+            BigDecimal flaggedPct = total > 0
+                    ? BigDecimal.valueOf(flagged * 100.0 / total)
+                    .setScale(2, RoundingMode.HALF_UP)
+                    : BigDecimal.ZERO;
+
+            // Classify location risk
+            String riskLabel;
+            if (flaggedPct.doubleValue() >= 50)       riskLabel = "DANGEROUS";
+            else if (flaggedPct.doubleValue() >= 20)  riskLabel = "MODERATE";
+            else                                       riskLabel = "SAFE";
+
+            return LocationAnalyticsDTO.builder()
+                    .location(row[0] != null ? row[0].toString() : "Unknown")
+                    .totalTransactions(total)
+                    .flaggedCount(flagged)
+                    .flaggedPercentage(flaggedPct)
+                    .avgRiskScore(avgRiskScore)
+                    .riskLabel(riskLabel)
+                    .build();
+        }).collect(Collectors.toList());
     }
 }

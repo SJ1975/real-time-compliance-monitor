@@ -1,0 +1,160 @@
+{
+  "summary": {
+    "generated_at": "2026-08-24T01:55:31.018375",
+    "total_transactions": 25,
+    "flagged_transactions": 7,
+    "clean_transactions": 18,
+    "flagged_percentage": 28.0,
+    "total_volume_usd": 80014.85,
+    "average_amount": 3200.59,
+    "max_transaction": 19329.35,
+    "min_transaction": 290.69
+  },
+  "daily_trends": [
+    {
+      "date": "2026-08-23",
+      "total_transactions": 25,
+      "total_amount": 80014.85,
+      "avg_amount": 3200.59,
+      "flagged_count": 7
+    }
+  ],
+  "hourly_patterns": [
+    {
+      "hour": 20,
+      "transaction_count": 25,
+      "avg_amount": 3200.59,
+      "flagged_count": 7,
+      "time_label": "20:00 - 21:00"
+    }
+  ],
+  "risk_breakdown": [
+    {
+      "risk_level": "LOW",
+      "count": 22,
+      "total_amount": 44720.74,
+      "avg_risk_score": 4.55
+    },
+    {
+      "risk_level": "MEDIUM",
+      "count": 3,
+      "total_amount": 35294.11,
+      "avg_risk_score": 38.33
+    }
+  ],
+  "location_analytics": [
+    {
+      "location": "Iran",
+      "total_transactions": 3,
+      "flagged_count": 3,
+      "avg_risk_score": 25.0,
+      "total_amount": 8989.75,
+      "flagged_pct": 100.0,
+      "risk_label": "DANGEROUS"
+    },
+    {
+      "location": "Toronto",
+      "total_transactions": 4,
+      "flagged_count": 2,
+      "avg_risk_score": 18.75,
+      "total_amount": 21488.2,
+      "flagged_pct": 50.0,
+      "risk_label": "DANGEROUS"
+    },
+    {
+      "location": "Chicago",
+      "total_transactions": 2,
+      "flagged_count": 1,
+      "avg_risk_score": 20.0,
+      "total_amount": 19131.5,
+      "flagged_pct": 50.0,
+      "risk_label": "DANGEROUS"
+    },
+    {
+      "location": "North Korea",
+      "total_transactions": 1,
+      "flagged_count": 1,
+      "avg_risk_score": 25.0,
+      "total_amount": 3835.04,
+      "flagged_pct": 100.0,
+      "risk_label": "DANGEROUS"
+    },
+    {
+      "location": "Dubai",
+      "total_transactions": 5,
+      "flagged_count": 0,
+      "avg_risk_score": 0.0,
+      "total_amount": 13226.36,
+      "flagged_pct": 0.0,
+      "risk_label": "SAFE"
+    },
+    {
+      "location": "London",
+      "total_transactions": 2,
+      "flagged_count": 0,
+      "avg_risk_score": 0.0,
+      "total_amount": 2228.04,
+      "flagged_pct": 0.0,
+      "risk_label": "SAFE"
+    },
+    {
+      "location": "Houston",
+      "total_transactions": 2,
+      "flagged_count": 0,
+      "avg_risk_score": 0.0,
+      "total_amount": 3193.94,
+      "flagged_pct": 0.0,
+      "risk_label": "SAFE"
+    },
+    {
+      "location": "New York",
+      "total_transactions": 3,
+      "flagged_count": 0,
+      "avg_risk_score": 0.0,
+      "total_amount": 1417.73,
+      "flagged_pct": 0.0,
+      "risk_label": "SAFE"
+    },
+    {
+      "location": "Sydney",
+      "total_transactions": 3,
+      "flagged_count": 0,
+      "avg_risk_score": 0.0,
+      "total_amount": 6504.29,
+      "flagged_pct": 0.0,
+      "risk_label": "SAFE"
+    }
+  ],
+  "top_flagged_users": [
+    {
+      "user_id": "user-002",
+      "flagged_count": 2,
+      "total_flagged_amount": 5131.57,
+      "avg_risk_score": 30.0
+    },
+    {
+      "user_id": "user-004",
+      "flagged_count": 2,
+      "total_flagged_amount": 6304.51,
+      "avg_risk_score": 25.0
+    },
+    {
+      "user_id": "user-001",
+      "flagged_count": 1,
+      "total_flagged_amount": 15265.09,
+      "avg_risk_score": 40.0
+    },
+    {
+      "user_id": "user-003",
+      "flagged_count": 1,
+      "total_flagged_amount": 19329.35,
+      "avg_risk_score": 40.0
+    },
+    {
+      "user_id": "user-006",
+      "flagged_count": 1,
+      "total_flagged_amount": 2088.38,
+      "avg_risk_score": 25.0
+    }
+  ]
+}

@@ -53,4 +53,46 @@ public interface TransactionRepository extends JpaRepository<Transaction, String
     List<Transaction> findByTimestampBetweenOrderByTimestampDesc(
             LocalDateTime start, LocalDateTime end
     );
+
+    // Daily trends
+    @Query(value = """
+    SELECT
+        CAST(timestamp AS DATE) as date,
+        COUNT(*) as total_transactions,
+        COALESCE(SUM(amount), 0) as total_amount,
+        COALESCE(AVG(amount), 0) as avg_amount,
+        COALESCE(SUM(CASE WHEN flagged = true THEN 1 ELSE 0 END), 0) as flagged_count
+    FROM transactions
+    GROUP BY CAST(timestamp AS DATE)
+    ORDER BY CAST(timestamp AS DATE) DESC
+    """, nativeQuery = true)
+    List<Object[]> getDailyTrends();
+
+
+    // Hourly patterns
+    @Query(value = """
+    SELECT
+        EXTRACT(HOUR FROM timestamp) as hour,
+        COUNT(*) as transaction_count,
+        COALESCE(AVG(amount), 0) as avg_amount,
+        COALESCE(SUM(CASE WHEN flagged = true THEN 1 ELSE 0 END), 0) as flagged_count
+    FROM transactions
+    GROUP BY EXTRACT(HOUR FROM timestamp)
+    ORDER BY EXTRACT(HOUR FROM timestamp)
+    """, nativeQuery = true)
+    List<Object[]> getHourlyPatterns();
+
+
+    // Location analytics
+    @Query(value = """
+    SELECT
+        location,
+        COUNT(*) as total_transactions,
+        COALESCE(SUM(CASE WHEN flagged = true THEN 1 ELSE 0 END), 0) as flagged_count,
+        COALESCE(AVG(risk_score), 0) as avg_risk_score
+    FROM transactions
+    GROUP BY location
+    ORDER BY COUNT(*) DESC
+    """, nativeQuery = true)
+    List<Object[]> getLocationAnalytics();
 }
