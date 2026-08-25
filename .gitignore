@@ -62,5 +62,16 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
+# Python ETL
+etl/venv/
+etl/.venv/
+etl/reports/
+etl/.env
+etl/__pycache__/
+etl/*.pyc
+
+# Startup script logs
+*.log
+
 ### VS Code ###
 .vscode/
