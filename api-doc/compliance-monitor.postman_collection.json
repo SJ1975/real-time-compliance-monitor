@@ -1,0 +1,242 @@
+{
+  "info": {
+    "name": "Real-Time Compliance Monitor APIs",
+    "description": "Complete API collection for the Real-Time Compliance Monitoring & Risk Detection System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Transactions",
+      "item": [
+        {
+          "name": "Create Normal Transaction",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8080/api/v1/transactions",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"user-001\",\n  \"amount\": 500.00,\n  \"currency\": \"USD\",\n  \"merchant\": \"Amazon\",\n  \"location\": \"New York\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Create High Amount Transaction (Flagged)",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8080/api/v1/transactions",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"user-002\",\n  \"amount\": 15000.00,\n  \"currency\": \"USD\",\n  \"merchant\": \"Casino Royale\",\n  \"location\": \"Las Vegas\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Suspicious Location Transaction (Flagged)",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8080/api/v1/transactions",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"user-003\",\n  \"amount\": 200.00,\n  \"currency\": \"USD\",\n  \"merchant\": \"Unknown Vendor\",\n  \"location\": \"Iran\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Create Critical Transaction (All Rules)",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8080/api/v1/transactions",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"user-004\",\n  \"amount\": 25000.00,\n  \"currency\": \"USD\",\n  \"merchant\": \"Unknown Vendor\",\n  \"location\": \"North Korea\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Get All Transactions",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/transactions"
+          }
+        },
+        {
+          "name": "Get Transaction By ID",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/transactions/YOUR_TRANSACTION_ID"
+          }
+        },
+        {
+          "name": "Get Flagged Transactions",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/transactions/flagged"
+          }
+        },
+        {
+          "name": "Get High Risk Transactions",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/transactions/high-risk?minScore=60"
+          }
+        },
+        {
+          "name": "Get User Transactions",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/transactions/user/user-001"
+          }
+        },
+        {
+          "name": "Get User Activity Summary",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/transactions/user/user-001/summary"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Search (ElasticSearch)",
+      "item": [
+        {
+          "name": "Search All Transactions",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8080/api/v1/search/transactions",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{}"
+            }
+          }
+        },
+        {
+          "name": "Search Flagged Transactions",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8080/api/v1/search/transactions",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"flagged\": true\n}"
+            }
+          }
+        },
+        {
+          "name": "Search By Amount Range",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8080/api/v1/search/transactions",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"minAmount\": 5000,\n  \"maxAmount\": 20000\n}"
+            }
+          }
+        },
+        {
+          "name": "Search By Risk Level",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8080/api/v1/search/transactions",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"riskLevel\": \"HIGH\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Search Combined Filters",
+          "request": {
+            "method": "POST",
+            "url": "http://localhost:8080/api/v1/search/transactions",
+            "header": [{"key": "Content-Type", "value": "application/json"}],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"flagged\": true,\n  \"minAmount\": 5000,\n  \"riskLevel\": \"HIGH\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Search By User (ES)",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/search/transactions/user/user-001"
+          }
+        },
+        {
+          "name": "Search Flagged (ES)",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/search/transactions/flagged"
+          }
+        },
+        {
+          "name": "Search By Risk Level (ES)",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/search/transactions/risk/HIGH"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Dashboard & Analytics",
+      "item": [
+        {
+          "name": "Dashboard Summary",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/dashboard/summary"
+          }
+        },
+        {
+          "name": "Risk Breakdown",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/dashboard/risk-breakdown"
+          }
+        },
+        {
+          "name": "Daily Trends",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/dashboard/trends/daily"
+          }
+        },
+        {
+          "name": "Hourly Patterns",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/dashboard/trends/hourly"
+          }
+        },
+        {
+          "name": "Location Analytics",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/api/v1/dashboard/locations"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Health Check",
+      "item": [
+        {
+          "name": "Application Health",
+          "request": {
+            "method": "GET",
+            "url": "http://localhost:8080/actuator/health"
+          }
+        }
+      ]
+    }
+  ]
+}
