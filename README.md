@@ -1,24 +1,22 @@
 # 🛡️ Real-Time Compliance Monitoring & Risk Detection System
 
-A production-grade, event-driven backend system that processes high-volume
-financial transaction data in real time, detects suspicious activities using
-a rule engine, and provides fast search capabilities via ElasticSearch.
+An event-driven backend system that processes simulated financial transactions in real time, flags suspicious activity with a configurable rule engine, and supports fast search through Elasticsearch.
+
+> ℹ️ All data is simulated for learning and demonstration. This is not a certified AML/compliance prod
 
 ---
 
 ## 🏗️ Architecture
-```
-Transaction Generator
-        ↓
-   Apache Kafka
-        ↓
-  Consumer Service
-        ↓
-Compliance Rule Engine
-   ↙           ↘
-PostgreSQL   ElasticSearch
-   ↘           ↙
-    REST APIs
+
+```mermaid
+flowchart TD
+    G[Transaction Generator] --> K[Apache Kafka]
+    K --> C[Consumer Service]
+    C --> R[Compliance Rule Engine]
+    R --> P[(PostgreSQL)]
+    R --> E[(Elasticsearch)]
+    P --> A[REST APIs]
+    E --> A
 ```
 
 ---
@@ -47,7 +45,7 @@ PostgreSQL   ElasticSearch
 - **Risk Scoring System** — assigns scores 0-100, classifies as LOW/MEDIUM/HIGH/CRITICAL
 - **Dual Storage** — PostgreSQL for reliability, ElasticSearch for fast search
 - **Auto Transaction Generator** — simulates real financial activity
-- **REST APIs** — full CRUD + advanced search + dashboard endpoints
+- **REST APIs** — create and query transactions, advanced Elasticsearch search, and dashboard endpoints
 - **Docker Support** — entire system runs with one command
 
 ---
@@ -75,26 +73,19 @@ src/main/java/com/compliance/riskmonitor/
 
 ## 🐳 Quick Start (Docker)
 
-### Prerequisites
-- Docker Desktop installed and running
-- Java 17+ (for local development)
-- Maven 3.8+
+**Prerequisites:** Docker Desktop, running. Java 17+ and Maven 3.8+ are only needed to run the app outside Docker.
 
-### Run with Docker (Recommended)
 ```bash
-# Clone the repository
-git clone https://github.com/YOUR_USERNAME/real-time-compliance-monitor.git
+git clone https://github.com/SJ1975/real-time-compliance-monitor.git
 cd real-time-compliance-monitor
-
-#Double-click start.bat
-#       OR
-# Start all services
 docker-compose up --build
 ```
 
+On Windows you can also double-click `start.bat` (and `stop.bat` to stop).
+
 ### After Starting (takes 3-5 mins first time)
 
-All 6 services start automatically:
+All services start automatically:
 - Spring Boot App → `http://localhost:8080`
 - ElasticSearch → `http://localhost:9200`
 - Kibana → `http://localhost:5601`
@@ -107,20 +98,6 @@ All 6 services start automatically:
 | ❤ Health     | http://localhost:8080/actuator/health |
 | 📊 Dashboard | http://localhost:8080/api/v1/dashboard/summary |
 | 🔍 Kibana    | http://localhost:5601 |
-
-### Stop Everything
-```bash
-stop.bat
-
-
-### Run Locally (Without Docker App)
-```bash
-# Start infrastructure only
-docker-compose up -d postgres kafka elasticsearch zookeeper
-
-# Run Spring Boot app
-mvn spring-boot:run
-```
 
 ---
 
@@ -155,21 +132,6 @@ mvn spring-boot:run
 
 ---
 
-## 📊 Sample API Calls
-
-### Create Transaction
-```bash
-curl -X POST http://localhost:8080/api/v1/transactions \
-  -H "Content-Type: application/json" \
-  -d '{
-    "userId": "user-001",
-    "amount": 15000.00,
-    "currency": "USD",
-    "merchant": "Unknown Vendor",
-    "location": "Iran"
-  }'
-```
-
 ## 🐍 Python ETL Pipeline
 
 Batch analytics pipeline built with Python + Pandas.
@@ -198,6 +160,21 @@ curl -X POST http://localhost:8080/api/v1/search/transactions \
     "flagged": true,
     "minAmount": 5000,
     "riskLevel": "HIGH"
+  }'
+```
+
+## 📊 Sample API Calls
+
+### Create Transaction
+```bash
+curl -X POST http://localhost:8080/api/v1/transactions \
+  -H "Content-Type: application/json" \
+  -d '{
+    "userId": "user-001",
+    "amount": 15000.00,
+    "currency": "USD",
+    "merchant": "Unknown Vendor",
+    "location": "Iran"
   }'
 ```
 
