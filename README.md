@@ -50,6 +50,16 @@ flowchart TD
 
 ---
 
+## 📸 Screenshots
+
+| Dashboard summary | Flagged transactions |
+|---|---|
+| ![Dashboard](docs/images/dashboard.png) | ![Flagged](docs/images/flagged-transactions.png) |
+
+| Elasticsearch (Kibana) | PostgreSQL (pgAdmin) |
+|---|---|
+| ![Kibana](docs/images/kibana.png) | ![PostgreSQL](docs/images/postgres.png) |
+
 ## 📦 Project Structure
 ```
 src/main/java/com/compliance/riskmonitor/
