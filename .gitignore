@@ -11,6 +11,11 @@ target/
 *.war
 *.ear
 
+# Python
+.venv/
+__pycache__/
+*.pyc
+
 # IDE
 .idea/
 *.iml
@@ -75,3 +80,6 @@ etl/*.pyc
 
 ### VS Code ###
 .vscode/
+
+# Secrets
+.env
