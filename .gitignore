@@ -31,9 +31,6 @@ logs/
 .env
 *.env.local
 
-# Docker
-.dockerignore
-
 # OS
 .DS_Store
 Thumbs.db
