@@ -58,7 +58,7 @@ flowchart TD
 
 | Elasticsearch (Kibana) | PostgreSQL (pgAdmin) |
 |---|---|
-| ![Kibana](docs/images/kibana.png) | ![PostgreSQL](docs/images/postgres.png) |
+| ![kibana](docs/images/kibana.png) | ![PostgreSQL](docs/images/postgres.png) |
 
 ## 📦 Project Structure
 ```
