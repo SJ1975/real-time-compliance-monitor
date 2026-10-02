@@ -2,7 +2,7 @@
 
 An event-driven backend system that processes simulated financial transactions in real time, flags suspicious activity with a configurable rule engine, and supports fast search through Elasticsearch.
 
-> ℹ️ All data is simulated for learning and demonstration. This is not a certified AML/compliance prod
+> ℹ️ All data is simulated for learning and demonstration. This is not a certified  Anti-Money Laundering (AML) compliance prod
 
 ---
 
