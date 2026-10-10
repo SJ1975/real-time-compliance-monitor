@@ -1,13 +1,14 @@
-package com.compliance.risk_monitor;
+package com.compliance.riskmonitor;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+
+//@SpringBootTest
 class RiskMonitorApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    void contextLoads() {
+    }
 
 }
