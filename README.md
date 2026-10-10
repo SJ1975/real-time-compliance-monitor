@@ -232,6 +232,28 @@ app:
 
 ---
 
+## 🧪 Testing
+
+Unit tests cover the compliance rule engine: the high-amount, velocity and suspicious-location rules, plus risk score and level mapping. They need no Docker, Kafka or database.
+
+```bash
+mvn test
+```
+Expected result:
+
+```
+Tests run: 48, Failures: 0, Errors: 0, Skipped: 0
+```
+
+| Area | What is tested |
+|---|---|
+| High amount rule | Boundary at the threshold (just below, exactly at, just above) |
+| Velocity rule | Fires at the configured count, ignores old and other users' transactions |
+| Suspicious location rule | Listed countries fire, normal locations do not |
+| Rule engine | Score totals and LOW / MEDIUM / HIGH / CRITICAL levels |
+
+---
+
 ## 🏥 Health Check
 ```bash
 curl http://localhost:8080/actuator/health
